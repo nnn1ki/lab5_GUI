@@ -1,5 +1,4 @@
 package warGame;
-
 import java.util.Scanner;
 
 //планета, как класс, который объединяет все страны.
@@ -20,6 +19,7 @@ public class Menu {
             System.out.println("4/ Удалить страну из списка"); //нужно будет создать список
             System.out.println("5/ Вывести все");
             System.out.println("6/ Редактировать страну");
+
             System.out.println("0/ Выход");
 
             choice = readInt();

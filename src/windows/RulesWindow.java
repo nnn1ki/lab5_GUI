@@ -1,10 +1,12 @@
 package windows;
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
 
-public class RulesWindow {
+public class RulesWindow extends MainWindow {
 
 	JFrame _frame = new JFrame("Rules");
 	public RulesWindow(){

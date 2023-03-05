@@ -1,28 +1,16 @@
 package windows;
 
+import Listener.*;
+
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.net.http.WebSocket;
 
 
-
-/*
-нужно разбить составляющие она на несколько блоков и отрисовывать их по-отдельности
-
-первичное окно
--начать игру
--привила игры
--выйти
+public class MainWindow extends Window {
 
 
-нужно отдельные компоненты разбивать по блокам, эти блоки добавлять в другие блоки, тем самым делать как-бы разметку для страницы
- */
-
-public class MainWindow extends JFrame {
-
+    private Container container;
 
     public MainWindow() {
         JPanel pane = new JPanel();
@@ -38,28 +26,8 @@ public class MainWindow extends JFrame {
 
     }
 
-
-    private void addButton(String caption, Container container) {
-        JButton button = new JButton(caption);
-
-        // Подключение слушателей событий
-        button.addActionListener(new ListenerAction());
-        button.addChangeListener(new ListenerChange());
-
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setPreferredSize(new Dimension(150, 30));
-        container.add(button);
-    }
-
-
-    private void addlabel(String caption, Container container) {
-        JLabel label = new JLabel(caption);
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        container.add(label);
-    }
-
-
-    public void createUI(Container container) {
+    @Override
+    protected void createUI(Container container) {
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
         addlabel("Союз и война", container);
@@ -68,54 +36,9 @@ public class MainWindow extends JFrame {
         addButton("Играть", container);
         addButton("Правила игры", container);
         addButton("Выйти", container);
-
     }
 
-
 }
-
-
-//классы наблюдения
-class ListenerAction implements ActionListener{
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //возможно стоит создать логирование
-        System.out.println("Нжата кнопка " + e.getActionCommand() + '\n');
-
-        //создаем реакцию на кнопку тут
-
-        if (e.getActionCommand() == "Играть"){
-            System.out.println("Игра началась");
-
-
-        }
-        else if (e.getActionCommand() == "Правила игры") {
-            System.out.println("Правила игры");
-            new RulesWindow();
-        }
-        else if (e.getActionCommand() == "Выйти") {
-            System.out.println("Выход из игры");
-            System.exit(1);
-        }
-
-    }
-
-
-}
-
-class ListenerChange implements ChangeListener {
-
-    @Override
-    public void stateChanged(ChangeEvent e) {
-        // Источник события
-        Object src = e.getSource();
-        System.out.println("Cообщение о смене состояния объекта : "
-                + src.getClass());
-    }
-}
-
-
 
 
 
