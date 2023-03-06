@@ -5,25 +5,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
+//заменить все окно на всплывающее уведомление с тектом
 
-public class RulesWindow extends MainWindow {
+
+public class RulesWindow extends Window {
 
 	JFrame _frame = new JFrame("Rules");
 	public RulesWindow(){
-		_frame.setLayout(new BorderLayout());
-		createRuls();
-		_frame.pack();
-		_frame.setVisible(true);
-		_frame.setLocationRelativeTo(null);
+		JOptionPane.showMessageDialog(_frame, readFile());
 	}
-
-
-	private void createRuls(){
-		JLabel label = new JLabel();
-		label.setText(readFile());
-		_frame.add(label, BorderLayout.CENTER);
-	}
-
 
 	private String readFile(){
 		String text = "";
@@ -41,7 +31,5 @@ public class RulesWindow extends MainWindow {
 
 		return text;
 	}
-
-
 
 }
