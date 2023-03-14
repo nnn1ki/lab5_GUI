@@ -5,6 +5,10 @@ import java.awt.*;
 
 import Listener.*;
 
+//TODO
+//распределить все объекты по контейнерам и правильно расположить на экране
+
+
 public class GameWindow extends Window {
 
 	String[] _startMenu = {
@@ -27,37 +31,49 @@ public class GameWindow extends Window {
 		"Удалить союзников из списка"
 	};
 
-
+	JPanel _panel = new JPanel();
 
 	public GameWindow(){
-		JPanel pane = new JPanel(); //по факту это просто группа обыектов, в которую мы все запихиваем
-		createUI(pane);
+		createUI();
+
 		setTitle("Игра: Союз и война");
-		getContentPane().add(pane);
+		getContentPane().add(_panel);
 		setSize(500, 500);
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationByPlatform(true);
-		setTitle("Start menu");
+		setTitle("Game");
 		setVisible(true);
-		//pack();
-
 	}
 
-	//игровое поле булет представлять собой набор кнопок и экрана вывода информации
-	//три окна ввода для инфорации о стране, подписи к которым будут меняться на основе предыдущего выбора
-	//информация будет показываться всплывающим окном, по кнопке
+
+	protected void createUI() {
+		createFirstMenu(createPanel()); //отдаем на создание первую коробку
+		createInfoLabel(createPanel());
+	}
 
 
-	protected void createUI(Container container) {
+	protected JPanel createPanel(){
+		JPanel panel = new JPanel();
+		_panel.add(panel);
+		return panel;
+	}
+
+
+	protected void createFirstMenu(Container container){
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-		addlabel("Выберете действие", container);
+
+		addlabel("Выберете действие", container); //то есть мы должны передавать контейнер с указанным его расположением
 		addComboBox(_startMenu, container);
 		addComboBox(_countryMenu, container);
-
-
-
 	}
+
+	protected void createInfoLabel(Container container){
+		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+		addlabel("информация", container);
+		//возможно есть какой-то способ доставть элементы из панели...
+	}
+
 
 	protected void addComboBox(String[] menuArr, Container container){
 		JComboBox comboBox = new JComboBox(menuArr);
@@ -65,32 +81,4 @@ public class GameWindow extends Window {
 		container.add(comboBox);
 	}
 
-
-
-	//кнопки
-//        JButton button1 = new JButton("1/ Добавить республику в список");
-//        JButton button2 = new JButton("2/ Добавить монархию в список");
-//        JButton button3 = new JButton("2/ Добавить монархию в список");
-//        JButton button4 = new JButton("4/ Удалить страну из списка");
-//        JButton button5 = new JButton("5/ Вывести все");
-//        JButton button6 = new JButton("6/ Редактировать страну");
-//        JButton button0 = new JButton("0/ Выход");
-
-//        //мой наблюдпатель
-//        MyListener myListener = new MyListener();
-//        button1.addActionListener(myListener);
-//        button2.addActionListener(myListener);
-//        button3.addActionListener(myListener);
-//        button4.addActionListener(myListener);
-//        button5.addActionListener(myListener);
-//        button6.addActionListener(myListener);
-//        button0.addActionListener(myListener);
-
-//        containerButton.add(button0);
-//        containerButton.add(button1);
-//        containerButton.add(button2);
-//        containerButton.add(button3);
-//        containerButton.add(button4);
-//        containerButton.add(button5);
-//        containerButton.add(button6);
 }

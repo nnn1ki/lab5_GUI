@@ -25,6 +25,10 @@ public abstract class Window extends JFrame {
 	protected void addlabel(String caption, Container container) {
 		JLabel label = new JLabel(caption);
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		//label.setForeground(Color.BLACK);
+		//label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+
 		container.add(label);
 	}
 
