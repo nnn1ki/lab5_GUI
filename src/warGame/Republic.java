@@ -1,5 +1,7 @@
 package warGame;
 
+import javax.swing.*;
+
 public class Republic extends Government {
 
     protected int numberBatches; //количество партий
@@ -14,10 +16,15 @@ public class Republic extends Government {
         this.numberBatches = random.nextInt(100);
     }
 
-    public Republic(String govermentName, int warPower, int numberBatches ){ //передали значения
-        this.warPower = warPower;
-        this.governmentName = govermentName; //название страны
-        this.numberBatches = numberBatches;
+    public Republic(JTextField govermentName, JTextField warPower, JTextField numberBatches ){ //передали значения
+        try {
+            this.warPower = Integer.parseInt(warPower.getText());
+            this.governmentName = govermentName.getText(); //название страны
+            this.numberBatches = Integer.parseInt(numberBatches.getText());
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Введите все значения!");
+        }
+
     }
 
 

@@ -10,7 +10,7 @@ public class Menu {
 
     //республика, монархия, федерация, государство
     //делаем информационное приложение про строи государств
-    public static void main(String args[]){
+    public static void mainMenu(String args[]){
         int choice = -1;
         do{
             System.out.println("1/ Добавить республику в список"); //менб создания страны
@@ -19,13 +19,15 @@ public class Menu {
             System.out.println("4/ Удалить страну из списка"); //нужно будет создать список
             System.out.println("5/ Вывести все");
             System.out.println("6/ Редактировать страну");
-
             System.out.println("0/ Выход");
 
             choice = readInt();
             try {
                 switch (choice){
                     case 1: {
+
+                        //это должно быть в сложном всплывающем окне
+                        //в которм сразу можно булет ввести всю необходимую информацию
                         System.out.println("Введите необходимые данные для Республики:");
 
                         System.out.println("Введите название страны: ");
@@ -37,7 +39,7 @@ public class Menu {
                         System.out.println("Введите количество партий: ");
                         int numberBatches = readInt();
 
-                        planet.add(new Republic(govermentName, warPower, numberBatches));
+                        //planet.add(new Republic(govermentName, warPower, numberBatches));
                         break;
                     }
 
@@ -53,7 +55,7 @@ public class Menu {
                         System.out.println("Время у власти: ");
                         int timePower = readInt();
 
-                        planet.add(new Monarchies(govermentName, warPower, timePower));
+                        //planet.add(new Monarchies(govermentName, warPower, timePower));
                         break;
                     }
 
@@ -69,13 +71,13 @@ public class Menu {
                         System.out.println("Введите количество субъектов: ");
                         int numberSubjects = readInt();
 
-                        planet.add(new Federation(govermentName, warPower, numberSubjects));
+                        //planet.add(new Federation(govermentName, warPower, numberSubjects));
                         break;
                     }
 
                     case 4: { //удалить страну из списка
                         System.out.println("Введите id страны");
-                        planet.remove(readInt()); //читаем номер и сразу его передаем
+                        //planet.remove(readInt()); //читаем номер и сразу его передаем
                         break;
                     }
 
@@ -130,35 +132,35 @@ public class Menu {
                 case 1:
                     System.out.println("Введите номер страны, которой нужно объявить войну");
                     planet.war(highlighted, readInt());
-                    main(null);
+                    mainMenu(null);
                     break;
 
                 case 2:
                     System.out.println("Введите номер страны, чтобы добавить ее в союзники");
                     planet.addNewAllies(highlighted ,readInt());
                     System.out.println("Союзник добавлен!");
-                    main(null);
+                    mainMenu(null);
                     break;
 
                 case 3:
                     System.out.println("Введите новое название для этой страны");
                     planet.changeName(highlighted, scanner.nextLine());
-                    main(null);
+                    mainMenu(null);
                     break;
                 case 4:
                     planet.printAllAllies();
-                    main(null);
+                    mainMenu(null);
                     break;
 
                 case 5:
                     planet.printAllies(highlighted);
-                    main(null);
+                    mainMenu(null);
                     break;
 
                 case 6:
                     break;
                 case 7:
-                    main(null);
+                    mainMenu(null);
                     break;
             }
         }while (choice != 0);

@@ -2,6 +2,7 @@ package windows;
 
 import Listener.ListenerAction;
 import Listener.ListenerChange;
+import Listener.ListenerGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,14 +23,24 @@ public abstract class Window extends JFrame {
 		container.add(button);
 	}
 
-	protected void addlabel(String caption, Container container) {
+	protected void addLabel(String caption, Container container) {
 		JLabel label = new JLabel(caption);
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		//label.setForeground(Color.BLACK);
-		//label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-
 		container.add(label);
+	}
+
+	protected void addComboBox(Container container, String[] menuArr){
+		JComboBox comboBox = new JComboBox(menuArr);
+		comboBox.addActionListener(new ListenerGame(comboBox));
+		comboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, comboBox.getMinimumSize().height));
+		container.add(comboBox);
+	}
+
+
+	protected void addTextField(Container container){
+		JTextField textField = new JTextField();
+		textField.setMaximumSize(new Dimension(Integer.MAX_VALUE, textField.getMinimumSize().height));
+		container.add(textField);
 	}
 
 

@@ -3,37 +3,53 @@ package windows;
 import javax.swing.*;
 import java.awt.*;
 
-import Listener.*;
-
-//TODO
-//распределить все объекты по контейнерам и правильно расположить на экране
-
 
 public class GameWindow extends Window {
 
-	String[] _startMenu = {
+	public String[] _addMenu = {
+		"-",
 		"Добавить республику в список",
 		"Добавить монархию в список",
 		"Добавить федерацию в список",
 		"Удалить страну из списка",
-		"Вывести все",
-		"Редактировать страну"
 	};
 
-	String[] _countryMenu = {
+	public String[] _actionMenu = {
+		"-",
 		"Объявить войну",
 		"Добавить союзника",
 		"Изменить название",
-		"Вывести у всех всех союзников",
-		"Вывести у всех всех союзников",
-		"Вывести у всех всех союзников",
-		"Вывести союзников только у этой страны",
-		"Удалить союзников из списка"
+		"Удалить союзников из списка",
+		"Редактировать страну"
 	};
 
-	JPanel _panel = new JPanel();
+	public String[] _showMenu = {
+		"-",
+		"Вывести все",
+		"Вывести у всех всех союзников",
+		"Вывести у всех всех союзников",
+		"Вывести у всех всех союзников",
+		"Вывести союзников только у этой страны"
+	};
 
-	public GameWindow(){
+	public JPanel _panel = new JPanel();
+	public final JComboBox _addComboBox = new JComboBox(_addMenu); // всегда заполнено
+	public JComboBox _actionComboBox;
+	public JComboBox _showComboBox;
+
+
+	//механика работы онка
+	/*
+	применение выбора происодит по кнопке "выполнить"
+	первичный список статичный
+	вторичный зависит от первичного (нужно менять наполнение комбобокса)
+		во время выбора первого меню, нужно это детектить и изменять второе меню
+		надо булет настроить try
+	 */
+
+
+	public GameWindow(){ //конструктор, первое открытие окна игры
+		_panel.setLayout(new BoxLayout(_panel, BoxLayout.Y_AXIS));
 		createUI();
 
 		setTitle("Игра: Союз и война");
@@ -47,10 +63,26 @@ public class GameWindow extends Window {
 	}
 
 
-	protected void createUI() {
-		createFirstMenu(createPanel()); //отдаем на создание первую коробку
-		createInfoLabel(createPanel());
+	protected void createUI() { //используется для создания нескольких разделов в окне
+		//блок ввода
+		createMenu(createPanel());
+		//возможно булет блок статистики
 	}
+
+	protected void createMenu(Container container){
+		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+
+		//так как это структкра, то я думаю можно оставить повторение кода
+		addLabel("Добавить", container);
+		addComboBox(container, _addMenu);
+
+		addLabel("Действие", container);
+		addComboBox(container, _actionMenu);
+
+		addLabel("Показать", container);
+		addComboBox(container, _showMenu);
+	}
+
 
 
 	protected JPanel createPanel(){
@@ -59,26 +91,22 @@ public class GameWindow extends Window {
 		return panel;
 	}
 
-
-	protected void createFirstMenu(Container container){
+	
+	protected void createInfo(Container container){ //блок информации, пока не до него
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-
-		addlabel("Выберете действие", container); //то есть мы должны передавать контейнер с указанным его расположением
-		addComboBox(_startMenu, container);
-		addComboBox(_countryMenu, container);
-	}
-
-	protected void createInfoLabel(Container container){
-		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-		addlabel("информация", container);
-		//возможно есть какой-то способ доставть элементы из панели...
+		
+		addLabel("Статистка", container);
+		addTextField(container);
 	}
 
 
-	protected void addComboBox(String[] menuArr, Container container){
-		JComboBox comboBox = new JComboBox(menuArr);
-		comboBox.addActionListener(new ListenerAction());
-		container.add(comboBox);
+	//вывод информации в окне игры
+	public void showInfo(String title, String message){
+		JOptionPane.showMessageDialog(_panel, message, title, JOptionPane.PLAIN_MESSAGE);
 	}
+
+
+
+
 
 }

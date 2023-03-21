@@ -1,5 +1,7 @@
 package warGame;
 
+import javax.swing.*;
+
 public class Federation extends Government {
     protected int numberSubjects; //количество субъектов федерации
     protected String construction = "Federation"; //оно неизменно для этого типа
@@ -11,10 +13,15 @@ public class Federation extends Government {
         this.numberSubjects = random.nextInt(100);
     }
 
-    public Federation(String govermentName, int electionDeadline, int numberSubjects){
-        this.warPower = electionDeadline;
-        this.governmentName = govermentName;
-        this.numberSubjects = numberSubjects;
+    public Federation(JTextField govermentName, JTextField electionDeadline, JTextField numberSubjects){
+        try {
+            this.warPower = Integer.parseInt(electionDeadline.getText());
+            this.governmentName = govermentName.getText();
+            this.numberSubjects = Integer.parseInt(numberSubjects.getText());
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Введите все значения!");
+        }
+
     }
 
 

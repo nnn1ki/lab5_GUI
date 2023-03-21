@@ -43,7 +43,7 @@ public class Planet { //общий класс для всех стран.
     }
 
     public void remove(int id){ //удаление страны по его номеру
-        governments.remove(governments.get(id));
+        governments.remove(id);
     }
 
     //война

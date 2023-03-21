@@ -1,5 +1,7 @@
 package warGame;
 
+import javax.swing.*;
+
 public class Monarchies extends Government {
     protected int timePower; //время у власти
     protected String construction = "Monarchies"; //оно неизменно для этого типа
@@ -11,10 +13,15 @@ public class Monarchies extends Government {
         this.timePower = random.nextInt(100);
     }
 
-    public Monarchies(String govermentName, int electionDeadline, int timePower){
-        this.warPower = electionDeadline;
-        this.governmentName = govermentName;
-        this.timePower = timePower;
+    public Monarchies(JTextField govermentName, JTextField electionDeadline, JTextField timePower){
+        try {
+            this.warPower = Integer.parseInt(electionDeadline.getText());
+            this.governmentName = govermentName.getText();
+            this.timePower = Integer.parseInt(timePower.getText());
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Введите все значения!");
+        }
+
     }
 
 
