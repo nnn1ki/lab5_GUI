@@ -30,6 +30,10 @@ public abstract class Window extends JFrame {
 	}
 
 	protected void addComboBox(Container container, String[] menuArr){
+		//TODO
+		//разобраться нужно ли вводить "имена" для кожного комбо
+
+
 		JComboBox comboBox = new JComboBox(menuArr);
 		comboBox.addActionListener(new ListenerGame(comboBox));
 		comboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, comboBox.getMinimumSize().height));

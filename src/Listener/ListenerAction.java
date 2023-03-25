@@ -13,8 +13,6 @@ public class ListenerAction implements ActionListener {
 		//возможно стоит создать логирование
 		System.out.println("Нжата кнопка " + e.getActionCommand() + '\n');
 
-		//создаем реакцию на кнопку тут
-
 		if (e.getActionCommand() == "Играть"){
 			System.out.println("Игра началась");
 			new GameWindow();
@@ -27,7 +25,6 @@ public class ListenerAction implements ActionListener {
 			System.out.println("Выход из игры");
 			System.exit(1);
 		}
-
 	}
 
 

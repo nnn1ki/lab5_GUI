@@ -2,11 +2,31 @@ package messageWindow;
 import javax.swing.*;
 import warGame.*;
 
+import java.awt.*;
+
 public class allMessageWindow {
 	private String _actionType = "";
 	Planet _planet = new Planet();
 	int _countryId;
 	JPanel _panel = new JPanel(); //поле которе быдем использовать для создания нескольких полей вводда
+
+	String[] _republicInfo = {
+			"Название страны",
+			"Военный потенциал",
+			"Количество партий"
+	};
+
+	String[] _federationInfo = {
+			"Название страны",
+			"Военный потенциал",
+			"Количество партий"
+	};
+
+	String[] _monarchiesInfo = {
+			"Название страны",
+			"Военный потенциал",
+			"Количество партий"
+	};
 
 	public allMessageWindow(String actionType){
 		_actionType = actionType;
@@ -29,54 +49,55 @@ public class allMessageWindow {
 		switch (_actionType){
 			case "Федерация": {
 				JLabel label = new JLabel("Федерация");
-				JTextField countryName = new JTextField("Название страны");
-				JTextField warPower = new JTextField("Военный потенциал");
-				JTextField numberSubjects = new JTextField("Количество субъектов");
-				_planet.add(new Federation(countryName, warPower, numberSubjects)); //в классе еужно булет переделать на принятие jtextfield
-
 				_panel.add(label);
-				_panel.add(countryName);
-				_panel.add(warPower);
-				_panel.add(numberSubjects);
 
+				JTextField[] textFields;
+				textFields = addTextFielsd(_republicInfo);
+
+				_planet.add(new Federation(textFields[0], textFields[1], textFields[2]));
 				JOptionPane.showMessageDialog(null, _panel);
 			}
 
 			case "Республика": {
-				JLabel label = new JLabel("Республика");
-				JTextField countryName = new JTextField("Название страны");
-				JTextField warPower = new JTextField("Военный потенциал");
-				JTextField numberBatches = new JTextField("Количество партий");
-				_planet.add(new Republic(countryName, warPower, numberBatches));
-
+				JLabel label = new JLabel("Респубдика");
 				_panel.add(label);
-				_panel.add(countryName);
-				_panel.add(warPower);
-				_panel.add(numberBatches);
 
+				JTextField[] textFields;
+				textFields = addTextFielsd(_republicInfo);
+
+				_planet.add(new Republic(textFields[0], textFields[1], textFields[2]));
 				JOptionPane.showMessageDialog(null, _panel);
 			}
 
 			case "Монархия": {
 				JLabel label = new JLabel("Монархия");
-				JTextField countryName = new JTextField("Название страны");
-				JTextField warPower = new JTextField("Военный потенциал");
-				JTextField timePower = new JTextField("Время у власти");
-				_planet.add(new Monarchies(countryName, warPower, timePower)); //в классе еужно булет переделать на принятие jtextfield
-
 				_panel.add(label);
-				_panel.add(countryName);
-				_panel.add(warPower);
-				_panel.add(timePower);
 
+				JTextField[] textFields;
+				textFields = addTextFielsd(_monarchiesInfo);
+
+				_planet.add(new Monarchies(textFields[0], textFields[1], textFields[2])); //в классе еужно булет переделать на принятие jtextfield
 				JOptionPane.showMessageDialog(null, _panel);
-
-
 			}
 
-
+			break;
+			default:
+				throw new IllegalStateException("Unexpected value: " + _actionType);
 		}
 	}
+
+	private JTextField[] addTextFielsd(String[] info){
+		JTextField[] textFields = new JTextField[3];
+
+		for (int i = 0; i < info.length; i++){
+			JTextField text = new JTextField(info[i]);
+			_panel.add(text);
+			textFields[i] = text;
+		}
+		return textFields;
+	}
+
+
 
 
 	private void deleteCountry(){

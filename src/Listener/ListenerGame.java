@@ -25,10 +25,15 @@ public class ListenerGame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String selectedItem = (String) comboBox.getSelectedItem();
 
-		if(selectedItem.equals("Добавить республику в список")){
-			new allMessageWindow("Республика");
+		System.out.println(e.getActionCommand());
+		System.out.println(e.getSource()); //получаем именно этот комбо бокс
+		chose(e.getActionCommand());
 
-		} else if (selectedItem.equals("Добавить монархию в список")) {
+//
+//		if(selectedItem.equals("Добавить республику в список")){
+//			new allMessageWindow("Республика");
+//
+		if (selectedItem.equals("Добавить монархию в список")) {
 			new allMessageWindow("Монархия");
 
 		} else if (selectedItem.equals("Добавить федерацию в список")) {
@@ -41,6 +46,13 @@ public class ListenerGame implements ActionListener {
 
 
 
+	}
+
+	protected void chose(String actionEvent){
+		switch (actionEvent.toString()){
+			case "Добавить республику":
+				new allMessageWindow("Республика");
+		}
 	}
 
 
