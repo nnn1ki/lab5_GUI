@@ -2,14 +2,22 @@ package messageWindow;
 import javax.swing.*;
 import warGame.*;
 
-import java.awt.*;
+import windows.GameWindow;
+
+
 
 public class allMessageWindow {
-	private String _actionType = "";
-	Planet _planet = new Planet();
-	int _countryId;
+	private String _selectedItem = ""; //для передачи
+	Planet _planet = new Planet(); //индекс создается автоматически
 	JPanel _panel = new JPanel(); //поле которе быдем использовать для создания нескольких полей вводда
 
+	Object[] _combo;
+
+
+
+
+	//TODO
+	//эти поля можно вынести в классы стран
 	String[] _republicInfo = {
 			"Название страны",
 			"Военный потенциал",
@@ -28,38 +36,122 @@ public class allMessageWindow {
 			"Количество партий"
 	};
 
-	public allMessageWindow(String actionType){
-		_actionType = actionType;
+	public allMessageWindow(JComboBox comboBox){
 
+		_selectedItem = comboBox.getSelectedItem().toString();
+		_combo = (Object[]) GameWindow.getCombo();
 
-		//возможно это можно сделать как-то иначе
-		if(!_actionType.equals("Удаление")){
-			inputInformation();
-		}
-		else {
-			deleteCountry();
+		if (comboBox.equals(_combo[0])){
+			firstCombo();
+		} else if (comboBox.equals(_combo[1])){
+			secondCombo();
+		} else if (comboBox.equals(_combo[2])){
+			thirdCombo();
 		}
 
 	}
 
-	private void inputInformation(){
+	protected void firstCombo(){
+		switch (_selectedItem.toString()){
+			case "Добавить республику в список":
+				addInformation("Республика");
+
+			case "Добавить монархию в список":
+				addInformation("Монархия");
+
+			case "Добавить федерацию в список":
+				addInformation("Федерация");
+
+			case "Удалить страну из списка":
+				deleteCountry();
+
+			default:
+				//TODO
+				//нужно отладить момент выбора первогй строки
+		}
+	}
+
+	protected void secondCombo(){
+		switch (_selectedItem.toString()){
+			case "Объявить войну":
+				//todo
+				//вывести индексы стран
+				//вывести названия стран
+				//вывести военный потенциал
+				//чекбоксы около кадой страны
+				//вывести отдельным окном результат войны
+
+
+			case "Добавить союзника":
+				//вывести индексы стран
+				//вывести названия стран
+				//вывести военный потенциал
+				//чекбоксы около каждой страны
+
+
+			case "Изменить название":
+				//ввести название страны
+
+			case "Удалить союзников из списка":
+				//ввести индекс страны
+				//вывести всех союзников страны с чекбоксами для удаления
+			case "Редактировать страну":
+				//ввести индекс страны
+				//вывести все тоде самое, что и при вводе, только вбить в базовые значения значения из памяти
+
+
+			default:
+				//TODO
+				//нужно отладить момент выбора первогй строки
+		}
+	}
+
+
+
+		protected  void thirdCombo(){
+		switch (_selectedItem.toString()){
+			case "Вывести все":
+				StringBuilder allInfo = _planet.print();
+				JTextField textField = new JTextField(String.valueOf(allInfo));
+				textField.setEditable(false);
+				_panel.add(textField);
+
+				JOptionPane.showMessageDialog(null, _panel);
+			case "Вывести у всех всех союзников":
+
+			case "Изменить название":
+
+			case "Вывести союзников только у этой страны":
+
+
+			default:
+				//TODO
+				//нужно отладить момент выбора первогй строки
+		}
+
+	}
+
+
+
+	private void addInformation(String item){
 
 		_panel.setLayout(new BoxLayout(_panel, BoxLayout.Y_AXIS));
 
-		switch (_actionType){
+		switch (item){
 			case "Федерация": {
 				JLabel label = new JLabel("Федерация");
 				_panel.add(label);
 
 				JTextField[] textFields;
-				textFields = addTextFielsd(_republicInfo);
+				textFields = addTextFielsd(_federationInfo);
 
 				_planet.add(new Federation(textFields[0], textFields[1], textFields[2]));
+
 				JOptionPane.showMessageDialog(null, _panel);
 			}
 
 			case "Республика": {
-				JLabel label = new JLabel("Респубдика");
+				JLabel label = new JLabel("Республика");
 				_panel.add(label);
 
 				JTextField[] textFields;
@@ -82,7 +174,7 @@ public class allMessageWindow {
 
 			break;
 			default:
-				throw new IllegalStateException("Unexpected value: " + _actionType);
+				throw new IllegalStateException("Unexpected value: " + _selectedItem);
 		}
 	}
 

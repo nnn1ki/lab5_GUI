@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class GameWindow extends Window {
 
-	public String[] _addMenu = {
+	public static String[] _addMenu = {
 		"-",
 		"Добавить республику в список",
 		"Добавить монархию в список",
@@ -14,7 +14,7 @@ public class GameWindow extends Window {
 		"Удалить страну из списка",
 	};
 
-	public String[] _actionMenu = {
+	public static String[] _actionMenu = {
 		"-",
 		"Объявить войну",
 		"Добавить союзника",
@@ -23,29 +23,15 @@ public class GameWindow extends Window {
 		"Редактировать страну"
 	};
 
-	public String[] _showMenu = {
+	public static String[] _showMenu = {
 		"-",
 		"Вывести все",
-		"Вывести у всех всех союзников",
-		"Вывести у всех всех союзников",
 		"Вывести у всех всех союзников",
 		"Вывести союзников только у этой страны"
 	};
 
 	public JPanel _panel = new JPanel();
-	public final JComboBox _addComboBox = new JComboBox(_addMenu); // всегда заполнено
-	public JComboBox _actionComboBox;
-	public JComboBox _showComboBox;
-
-
-	//механика работы онка
-	/*
-	применение выбора происодит по кнопке "выполнить"
-	первичный список статичный
-	вторичный зависит от первичного (нужно менять наполнение комбобокса)
-		во время выбора первого меню, нужно это детектить и изменять второе меню
-		надо булет настроить try
-	 */
+	public static Object[] combo = new Object[3];
 
 
 	public GameWindow(){ //конструктор, первое открытие окна игры
@@ -72,18 +58,15 @@ public class GameWindow extends Window {
 	protected void createMenu(Container container){
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
-		//так как это структкра, то я думаю можно оставить повторение кода
 		addLabel("Добавить", container);
-		addComboBox(container, _addMenu);
+		combo[0] = addComboBox(container, _addMenu);
 
 		addLabel("Действие", container);
-		addComboBox(container, _actionMenu);
+		combo[1] = addComboBox(container, _actionMenu);
 
 		addLabel("Показать", container);
-		addComboBox(container, _showMenu);
+		combo[2] = addComboBox(container, _showMenu);
 	}
-
-
 
 	protected JPanel createPanel(){
 		JPanel panel = new JPanel();
@@ -106,6 +89,9 @@ public class GameWindow extends Window {
 	}
 
 
+	public static Object getCombo(){
+		return combo;
+	}
 
 
 

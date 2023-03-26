@@ -18,7 +18,7 @@ public abstract class Government {
         count++;
     }
 
-    public abstract void printInfo(); //нужно будет адаптираовать это под вывод на лейбл
+    public abstract StringBuilder printInfo(); //нужно будет адаптираовать это под вывод на лейбл
     public String declareWar(Government government){ //проверяем на победу
         if(this.warPower > government.warPower) {
             this.warPower += 100;

@@ -26,7 +26,7 @@ public class Monarchies extends Government {
 
 
     @Override
-    public void printInfo() {
+    public StringBuilder printInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
         //название страны, кто правитель, сколько осталось править, количество субъектов
         stringBuilder.append("" + id + '\n');
@@ -36,7 +36,7 @@ public class Monarchies extends Government {
         stringBuilder.append("Военный потенциал: " + this.warPower + '\n');
         stringBuilder.append("Время у власти: " + this.timePower + '\n');
 
-        System.out.println(stringBuilder);
+	    return stringBuilder;
     }
 
 }

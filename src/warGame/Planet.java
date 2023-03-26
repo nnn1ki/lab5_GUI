@@ -11,10 +11,13 @@ public class Planet { //общий класс для всех стран.
         this.governments.add(government);
     }
 
-    public void print(){
+    public StringBuilder print(){
+        StringBuilder stringBuilder = new StringBuilder("");
+
         for(Government government : governments){
-            government.printInfo();
+            stringBuilder.append(government.printInfo() + "\n");
         }
+        return stringBuilder;
     }
 
     public void printAllies(int index){

@@ -30,7 +30,7 @@ public class Republic extends Government {
 
 
     @Override
-    public void printInfo() {
+    public StringBuilder printInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
         //название страны, кто правитель, сколько осталось править, количество субъектов
         stringBuilder.append("" + id + '\n');
@@ -40,6 +40,6 @@ public class Republic extends Government {
         stringBuilder.append("Военный потенциал: " + this.warPower + '\n');
         stringBuilder.append("Количество партий: " + this.numberBatches + '\n');
 
-        System.out.println(stringBuilder);
+	    return stringBuilder;
     }
 }

@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class Window extends JFrame {
-
 	protected void createUI(Container container) {}
 
 	protected void addButton(String caption, Container container) {
@@ -29,15 +28,12 @@ public abstract class Window extends JFrame {
 		container.add(label);
 	}
 
-	protected void addComboBox(Container container, String[] menuArr){
-		//TODO
-		//разобраться нужно ли вводить "имена" для кожного комбо
-
-
+	protected JComboBox addComboBox(Container container, String[] menuArr){
 		JComboBox comboBox = new JComboBox(menuArr);
 		comboBox.addActionListener(new ListenerGame(comboBox));
 		comboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, comboBox.getMinimumSize().height));
 		container.add(comboBox);
+		return comboBox;
 	}
 
 
@@ -46,6 +42,8 @@ public abstract class Window extends JFrame {
 		textField.setMaximumSize(new Dimension(Integer.MAX_VALUE, textField.getMinimumSize().height));
 		container.add(textField);
 	}
+
+
 
 
 }
